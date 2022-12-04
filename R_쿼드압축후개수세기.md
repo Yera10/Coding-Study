@@ -4,7 +4,7 @@
 
 
 ### **Input**
-- 0과 1로 이루어진 2n x 2n 크기의 2차원 정수 배열 arr
+- 0과 1로 이루어진 $2^n$ x $2^n$ 크기의 2차원 정수 배열 arr
 - 이 arr을 쿼드 트리와 같은 방식으로 압축
 
 압축방법
@@ -66,20 +66,18 @@ def solution(arr):
     return nemo_merge(res)
 ```
 - $O(N^2)$<br>
-  - $N$ : arr의 행의 개수 ($=2^n$)
+  - $N$ : arr의 행의 개수 ( $=2^n$ )
   - 시간복잡도 이거 맞아???? 
   - 일단 내가 계산한 방법은\
-  $
-  N^2 + (N/2)^2 + (N/4)^2 + \dots + (N/N)^2\\
-  = \sum_{k=0}^{n}(N^2/(2^k)^2)\\
-  = \sum_{k=0}^{n}(N^2/4^k)\\
-  = \dfrac {N^2 \times \bigg(1-\dfrac{1}{4^{n+1}}\bigg)}{1-\frac{1}{4}}\\
-  = \dfrac{4}{3} \times N^2 \times \bigg(1-\dfrac{1}{4^{n+1}}\bigg)\\
-  = \dfrac{N^2}{3} \times \bigg(4-\dfrac{1}{4^{n}}\bigg)\\
-  = \dfrac{N^2}{3} \times \bigg(4-\dfrac{1}{N^2}\bigg)\\
-  = \dfrac{1}{3} \times (4N^2-1)\, = \, \dfrac{4N^2-1}{3}\\
-  \Rightarrow O(N^2)
-  $
+$N^2 + (N/2)^2 + (N/4)^2 + \dots + (N/N)^2$\
+$=\large \sum_{k=0}^{n} \dfrac{N^2}{(2^k)^2}$\
+$=\sum_{k=0}^n \dfrac{N^2}{4^k}$\
+$=\dfrac {N^2 \times \bigg(1-\dfrac{1}{4^{n+1}}\bigg)}{1-\dfrac{1}{4}}$\
+$=\dfrac{4}{3} \times N^2 \times \bigg(1-\dfrac{1}{4^{n+1}}\bigg)$\
+$=\dfrac{N^2}{3} \times \bigg(4-\dfrac{1}{4^{n}}\bigg)$\
+$=\dfrac{N^2}{3} \times \bigg(4-\dfrac{1}{N^2}\bigg)$\
+$=\dfrac{1}{3} \times (4N^2-1)\, = \, \dfrac{4N^2-1}{3}$\
+$\Rightarrow O(N^2)$
   - 누구라도 내가 잘못 계산했다면 알려주면 좋겠다..
 - 처음에는 문제 설명처럼 \
 큰 네모 탐색 => 같지 않으면 4개로 쪼개기 => 다음으로 작은 네모 탐색 => 같지 않으면 4개로 쪼개기 ...\
