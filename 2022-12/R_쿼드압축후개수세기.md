@@ -84,3 +84,45 @@ $\Rightarrow O(N^2)$
 같은 순서로 생각했는데, 그러면 탐색했던 부분을 또 탐색하는 낭비가 많이 발생하고, 시간복잡도가 $O(log_2N\times N^2)$가 된다.\
 너무너무 낭비인 것 같아서 작은 네모부터 탐색해서 합쳐가는 방식으로 바꿨는데, 나아진 게 없는 건가..? 
 
+
+### **더 빠른 풀이 코드**
+통과 (191.23ms, 19.1MB)
+```python
+def solution(arr):
+    answer = [0, 0]
+
+    def check(size, x, y):
+        # 사이즈가 1일때 
+        if size == 1:
+            answer[arr[y][x]] += 1
+            return
+        first = arr[y][x]
+        # 0,1 로 이루어져 있을 때
+        for dy in range(size):
+            for dx in range(size):
+                if first != arr[y + dy][x + dx]:
+                    # 4개로 쪼개서 영역별로 CHECK
+                    check(size // 2, x, y)
+                    check(size // 2, x + size // 2, y)
+                    check(size // 2, x, y + size // 2)
+                    check(size // 2, x + size // 2, y + size // 2)
+                    return
+        # 0 또는 1 로만 이루어져 있을 때
+        answer[first] += 1
+
+    check(len(arr),0,0)
+
+    return answer
+```
+- $O(N^2)$<br>
+- 처음에 큰 네모부터 보면, 최악의경우 $O(log_2N\times N^2)$ 이라고 생각했는데, 큰 네모에서 끝까지 탐색했다면, 압축되어 다음 탐색을 할 필요가 없을 테고, 끝까지 탐색하지 않았더라도, 많은 부분을 탐색했다면, 그 다음 레벨에서 압축되어 탐색할 양이 줄기 때문에 $log_2N\times N^2$ 의 최악의 경우는 발생되지 않는다는 걸 알았다. 
+- 그럼 2x2 의 수준에서 하나도 압축되는 것이 없을 때를 최악의 경우라고 한다면,\
+위의 방법대로 계산했을 때,\
+$1 + 2^2 + 2^4 + 2^6 + \dots + N^2$\
+$=(2^2)^0 + (2^2)^1 + (2^2)^2 + (2^2)^3 + \dots + (2^2)^n$\
+$=\sum_{k=0}^{n} 4^k$\
+$=\dfrac {(4^{n+1}-1)}{(4-1)}$\
+$=\dfrac{1}{3} \times (4N^2-1)$\
+$\Rightarrow O(N^2)$
+- 내가 푼 방법의 경우, 최악의 경우든 최선의 경우가 없고 항상 같은 계산을 한다.\
+하지만, 이 풀이는 압축할 수 있는 경우가 되면, 계산량이 줄어들어 더 효율적이다. 
