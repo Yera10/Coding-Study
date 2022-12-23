@@ -2,6 +2,8 @@
 
 > - 큰 문제를 작은 여러개의 문제로 나누어 푸는 문제
 > - 작은 문제가 반복되어 일어나는 경우
+> - 최적화된 재귀
+> - 다항시간에 문제를 해결하는 것 (?)
 
 ## DP 의 조건
 > ### 1. 부분 반복 문제
@@ -25,3 +27,14 @@
 > - 문장에 나와있는 변수 개수 만큼 메모를 위한 캐시 배열을 생성한다.
 > - **문제를 부분 문제로 나누고, 점화식을 구하여 문제를 함수로 표현**한다.
 > - Top-Down의 경우 재귀 함수, Bottom-Up의 경우 for문을 활용하여 답을 도출한다.
+
+## 적용 (??)
+> - Diff Utility (Longest Common Subsequence 문제 기반): 두 개의 파일의 차이점을 알아내기 위해 쓰인다. Git에서도 사용된다.
+> - Resource Allocation(0-1 배낭knapsack 문제 기반)
+> - 연관 검색어 검색 (Edit distance 문제 기반)
+> - 플로이드-워셜 알고리즘Floyd-Warshall Algorithm: 그래프의 모든 정점의 쌍의 최단 거리를 찾아내는 알고리즘.
+> - 벨만-포드 알고리즘Bellman-Ford Algorithm: source router와 destination router 사이 최단 거리를 찾아내는 알고리즘.
+
+---
+### References
+https://www.hanbit.co.kr/media/channel/view.html?cms_code=CMS4008657032
