@@ -1,14 +1,17 @@
 # SOLUTION
 def solution(N, arr):
-    arr.sort()
+    rank_arr = [0 for _ in range(N+1)]
+    
+    for a in arr:
+        rank_arr[a[0]] = a[1]
     
     cnt = 0
     last = N+1
     
-    for a, b in arr:
-        if b < last:
+    for r in rank_arr[1:]:
+        if r < last:
             cnt += 1
-            last = b
+            last = r
     
     return cnt
 
