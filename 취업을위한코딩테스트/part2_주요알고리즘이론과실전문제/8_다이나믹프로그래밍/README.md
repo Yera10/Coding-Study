@@ -57,3 +57,9 @@ def fibo(x):
 ### 결론
 - 가능하다면 탑다운 보다는 보텀업 방식 권장
   - 재귀함수는 스택의 크기가 한정되어 있을 수도 있기 때문
+
+## 문제
+[1. 1로만들기](./%EB%AC%B8%EC%A0%9C_1%EB%A1%9C%EB%A7%8C%EB%93%A4%EA%B8%B0.md)\
+[2. 개미전사](./%EB%AC%B8%EC%A0%9C_%EA%B0%9C%EB%AF%B8%EC%A0%84%EC%82%AC.md)\
+[3. 바닥공사](./%EB%AC%B8%EC%A0%9C_%EB%B0%94%EB%8B%A5%EA%B3%B5%EC%82%AC.md)\
+[4. 효율적인 화폐구성](./%EB%AC%B8%EC%A0%9C_%ED%9A%A8%EC%9C%A8%EC%A0%81%EC%9D%B8%ED%99%94%ED%8F%90%EA%B5%AC%EC%84%B1.md)
