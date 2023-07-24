@@ -97,7 +97,6 @@ def dijkstra(N, g, start):
     distance = [INF] * N
     visited = [0] * N
     distance[start] = 0
-    visited[start] = 1
 
     for _ in range(N-1):
         now = get_smallest_node(N, visited, distance)
@@ -134,3 +133,80 @@ $N$은 노드의 개수, $E$는 간선의 개수
 - 최단 거리가 가장 짧은 노드를 찾을 때 (get_smallest_node함수를 사용할 때), 힙 자료구조를 사용하여 더 빠르게 개선시킨다. 
 
 [힙 자료구조](./Heap.md)
+
+개선된 다익스트라 코드
+```python
+import heapq
+INF = int(1e9)
+
+def dijkstra(N, g, start):
+    """다익스트라 알고리즘을 사용하여 start 노드로 부터 모든 노드로 최단 거리를 구하는 함수"""
+    distance = [INF] * N
+    distance[start] = 0
+    distance_heap = [[0,start]]
+
+    while distance_heap:
+        d, now = heapq.heappop(distance_heap)
+
+        if distance[now] < d:
+            continue
+        
+        for nv, nd in g[now]:
+            if distance[nv] > d + nd:
+                distance[nv] = d + nd
+                heapq.heappush(distance_heap, [d + nd, nv])
+        
+    return distance
+
+# TEST
+N = 6
+graph = [
+    [[1, 2], [2, 5], [3, 1]],
+    [[2, 3], [3, 2]], 
+    [[1, 3], [5, 5]], 
+    [[2, 3], [4, 1]], 
+    [[2, 1], [5, 2]],
+    []
+]
+start = 0
+print(dijkstra(N, graph, start))
+```
+
+
+### 플로이드 워셜
+- 모든 지점에서 모든 지점까지의 최단경로를 모두 구하는 경우
+- 시간복잡도 $O(N^3)$
+- 2차원 리스트에 '최단거리' 정보 저장
+  
+```python
+INF = int(1e9)
+
+def input2graph(N, M):
+    graph = [[INF]*N for _ in range(N)]
+
+    for _ in range(M):
+        s, e, d = map(int, input().split())
+        graph[s-1][e-1] = d
+    
+    for i in range(N):
+        graph[i][i] = 0
+    
+    return graph
+
+def floyd_warshell(N, graph):
+    for i in range(N):
+        for j in range(N):
+            for k in range(N):
+                graph[j][k] = min(graph[j][k], graph[j][i] + graph[i][k])
+                    
+    for g in graph:
+        for d in g:
+            print(d if d!=INF else "INFINITY", end=' ')
+        print()
+
+# TEST
+N = int(input())
+M = int(input())
+graph = input2graph(N, M)
+floyd_warshell(N, graph)
+```
